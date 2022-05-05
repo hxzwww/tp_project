@@ -1,33 +1,33 @@
 import os
 from player import player
-
+from interface import interface
 
 class game:                                                                     
                                                                                 
     def __init__(self):    
         os.system('clear')
-        self.__first_player = player()                                            
-        self.__second_player = player()                                           
+        self.first_player = player()                                            
+        self.second_player = player()
+        self.interface = interface()
                                                                                 
-    def __start_fighting(self):
+    def start_fighting(self):
         while True:
-            self.__first_player.shoot(self.__second_player)
-            if self.__first_player.win:
-                print('first player is a winner!')
+            self.first_player.shoot(self.second_player)
+            if self.first_player.win:
+                self.interface.print_winner(1)
                 return
-            self.__second_player.shoot(self.__first_player)
-            if self.__second_player.win:
-                print('second player is a winner!')
+            self.second_player.shoot(self.first_player)
+            if self.second_player.win:
+                self.interface.print_winner(2)
                 return
 
 
     def start_game(self):
-        input('first player are you ready? (enter "yes") ')
-        self.__first_player.create_fleet()
-        input(f'{self.__first_player.field.show()}(enter "yes")')
-        os.system('clear')
-        input('second player are you ready? (enter "yes") ')
-        self.__second_player.create_fleet()
-        input(f'{self.__second_player.field.show()}(enter "yes")')
-        self.__start_fighting()
+        self.interface.ask_for_ready(1)
+        self.first_player.create_fleet()
+        self.first_player.field.show('enter "yes"')
+        self.interface.ask_for_ready(2)
+        self.second_player.create_fleet()
+        self.second_player.field.show('enter "yes"')
+        self.start_fighting()
 

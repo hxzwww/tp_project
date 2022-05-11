@@ -17,6 +17,14 @@ class interface:
             input('first player are you ready? (enter "yes") ')
         if n == 2:
             input('second player are you ready? (enter "yes") ')
+    
+    def ask_for_superpower(self):
+        res = input('you can use your superpower (shoot all raw or column)\n enter yes or no: ')
+        if res == 'no':
+            return '-1'
+        if res == 'yes':
+            coordinates = input('choose: ')
+            return coordinates
 
     def show_field(self, field, txt):
         print(field)
@@ -49,8 +57,12 @@ class interface:
             coordinates.append(input('coordinates: '))
         return coordinates
 
-    def print_situation(self, first, enemy):
-        coordinates = input(
-            f"""your field:\n\n{first}\nyour enemy's field:\n\n{
-            enemy}\nchoose the cell to shoot: """)
-        return coordinates
+    def print_situation(self, first, enemy, type = 1):
+        if type:
+            coordinates = input(
+                f"""your field:\n\n{first}\nyour enemy's field:\n\n{
+                enemy}\nchoose the cell to shoot: """)
+            return coordinates
+        else:
+            print(f"""your field:\n\n{first}\nyour enemy's field:\n\n{            
+                enemy}\n""")
